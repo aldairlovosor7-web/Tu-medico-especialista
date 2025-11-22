@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Aldair Ramírez - Medicina Interna a Domicilio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 65px;
+            height: 65px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 40px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 3px 3px 20px rgba(0,0,0,0.4);
+        }
+
+        .navbar {
+            background: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3b7ea1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: #7fb069;
+            font-weight: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #3b7ea1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: #3b7ea1;
+            font-size: 1.3rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            color: #7fb069;
+        }
+
+        .hero {
+            margin-top: 90px;
+            padding: 3rem 5%;
+            background: linear-gradient(135deg, #3b7ea1 0%, #2c5f7a 100%);
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .specialty {
+            font-size: 1.4rem;
+            color: #7fb069;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: #3b7ea1;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .cta-button.secondary {
+            background: #7fb069;
+            color: white;
+        }
+
+        .urgencia-banner {
+            background: #dc2626;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .urgencia-banner a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .sobre-mi {
+            padding: 4rem 5%;
+            background: #f8fafc;
+        }
+
+        .sobre-mi-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .sobre-mi-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .sobre-mi-text h2 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-mi-text h3 {
+            font-size: 1.5rem;
+            color: #3b7ea1;
+            margin-bottom: 1rem;
+        }
+
+        .sobre-mi-text p {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .sobre-mi-text ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .sobre-mi-text ul li {
+            padding: 0.5rem 0;
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+
+        .sobre-mi-text ul li i {
+            color: #7fb069;
+            margin-right: 0.5rem;
+        }
+
+        .servicios {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .servicios-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .servicio-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #3b7ea1;
+            text-align: center;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .servicio-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .servicio-card h3 {
+            color: #3b7ea1;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .servicio-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .como-funciona {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f8fafc;
+        }
+
+        .pasos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .paso {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .paso-numero {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3b7ea1, #7fb069);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .paso h3 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .paso p {
+            color: #64748b;
+        }
+
+        .beneficios {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .beneficios-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .beneficio {
+            display: flex;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .beneficio:hover {
+            transform: translateX(5px);
+        }
+
+        .beneficio-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .beneficio-text h4 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .beneficio-text p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .ubicacion {
+            padding: 4rem 5%;
+            background: #f8fafc;
+        }
+
+        .ubicacion-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .ubicacion-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .ubicacion-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ubicacion-item-icon {
+            font-size: 3rem;
+        }
+
+        .ubicacion-item h4 {
+            color: #1e293b;
+            font-size: 1.2rem;
+        }
+
+        .ubicacion-item p {
+            color: #64748b;
+        }
+
+        .contacto {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+        }
+
+        .contacto-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contacto h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contacto p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contacto-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contacto-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: #1e293b;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contacto-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+        }
+
+        .contacto-btn.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .contacto-btn i {
+            font-size: 1.3rem;
+        }
+
+        .redes-sociales {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .redes-sociales h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .redes-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .red-social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .red-social-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .red-social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: white;
+        }
+
+        .red-social-item:hover .red-social-icon {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .red-social-icon.facebook {
+            background: #1877f2;
+        }
+
+        .red-social-icon.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .red-social-icon.tiktok {
+            background: #000000;
+        }
+
+        .red-social-label {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        .footer p {
+            opacity: 0.7;
+            margin: 0.3rem 0;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sobre-mi-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .logo-img {
+                height: 50px;
+            }
+
+            .social-icons {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .contacto-buttons {
+                flex-direction: column;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                font-size: 32px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.link/27apql" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo-container">
+                <img src="https://cdn.abacus.ai/images/7ba6f0d8-98d8-42a3-9b52-1fcaa6446d42.png" alt="Logo Dr. Aldair Ramírez" class="logo-img">
+                <div class="logo-text">
+                    <div class="logo">Dr. Aldair Ramírez</div>
+                    <div class="logo-subtitle">Medicina Interna a Domicilio</div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#como-funciona">Cómo Funciona</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100090722150996&mibextid=ZbWKwL" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/tu_medico_especialista/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@tu.mdico.especial8" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Banner de Urgencias -->
+    <div class="urgencia-banner">
+        🚨 Atención de Urgencias 24/7 - Llama Ahora: <a href="tel:+50371170287">+503 7117-0287</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Atención Médica Especializada en la Comodidad de tu Hogar</h1>
+                <p class="specialty">Especialista en Medicina Interna</p>
+                <p>Consultas médicas domiciliares y en clínica. Especializado en control de enfermedades crónicas, atención geriátrica y manejo del dolor.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.link/27apql" class="cta-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Agendar por WhatsApp
+                    </a>
+                    <a href="tel:+50371170287" class="cta-button secondary">
+                        <i class="fas fa-phone"></i> Llamar Ahora
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdn.abacus.ai/images/cf130c54-2451-4eb4-b12c-880bdc4c106f.png" alt="Dr. Aldair Ramírez atendiendo paciente">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section class="sobre-mi" id="sobre-mi">
+        <div class="sobre-mi-content">
+            <div class="sobre-mi-image">
+                <img src="https://cdn.abacus.ai/images/1e5cbbec-8673-4d92-bb85-90d503188d3a.png" alt="Dr. Aldair Ramírez">
+            </div>
+            <div class="sobre-mi-text">
+                <h2>Dr. Aldair Ramírez</h2>
+                <h3>Médico Especialista en Medicina Interna</h3>
+                <p>Con años de experiencia en el cuidado integral de pacientes adultos, me dedico a brindar atención médica de calidad tanto a domicilio como en clínica.</p>
+                <p>Mi enfoque está en el manejo de enfermedades crónicas, atención especializada para adultos mayores y personas con movilidad reducida, garantizando un cuidado personalizado y humano.</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Especialista en Medicina Interna certificado</li>
+                    <li><i class="fas fa-check-circle"></i> Atención domiciliaria en San Salvador</li>
+                    <li><i class="fas fa-check-circle"></i> Consulta en clínica disponible</li>
+                    <li><i class="fas fa-check-circle"></i> Enfoque en enfermedades crónicas</li>
+                    <li><i class="fas fa-check-circle"></i> Experiencia en geriatría</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="servicios" id="servicios">
+        <div class="servicios-content">
+            <h2 class="section-title">Servicios Médicos Especializados</h2>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">🩺</div>
+                    <h3>Consulta de Medicina Interna</h3>
+                    <p>Evaluación médica completa, diagnóstico y tratamiento de enfermedades en adultos, tanto a domicilio como en clínica.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">❤️</div>
+                    <h3>Control de Enfermedades Crónicas</h3>
+                    <p>Seguimiento especializado de diabetes, hipertensión, enfermedades cardíacas, renales y otras patologías crónicas.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">👴</div>
+                    <h3>Atención Geriátrica</h3>
+                    <p>Cuidado especializado para adultos mayores con seguimiento personalizado y manejo integral de sus condiciones.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">💉</div>
+                    <h3>Infiltraciones de Rodilla</h3>
+                    <p>Procedimiento especializado para el manejo del dolor articular y mejora de la movilidad.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🩹</div>
+                    <h3>Control de Dolor Crónico</h3>
+                    <p>Manejo integral del dolor crónico con enfoque multidisciplinario para mejorar tu calidad de vida.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🦽</div>
+                    <h3>Atención a Personas con Movilidad Reducida</h3>
+                    <p>Servicio especializado para pacientes con dificultades de desplazamiento, llevando la atención médica a su hogar.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🏥</div>
+                    <h3>Consulta en Clínica</h3>
+                    <p>Atención médica en consultorio equipado con tecnología moderna para diagnóstico y tratamiento.</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🚨</div>
+                    <h3>Urgencias Médicas</h3>
+                    <p>Atención inmediata para situaciones que requieren intervención médica rápida, disponible 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Funciona -->
+    <section class="como-funciona" id="como-funciona">
+        <h2 class="section-title">¿Cómo Funciona?</h2>
+        <div class="pasos">
+            <div class="paso">
+                <div class="paso-numero">1</div>
+                <h3>Contacta</h3>
+                <p>Llama o envía un mensaje por WhatsApp para agendar tu cita médica</p>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">2</div>
+                <h3>Agenda</h3>
+                <p>Coordinamos el horario y lugar (domicilio o clínica) que mejor se ajuste a ti</p>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">3</div>
+                <h3>Recibe Atención</h3>
+                <p>Atención médica especializada con todo el equipo necesario</p>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">4</div>
+                <h3>Seguimiento</h3>
+                <p>Seguimiento continuo de tu condición y ajuste de tratamiento según necesidad</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="beneficios" id="beneficios">
+        <div class="beneficios-content">
+            <h2 class="section-title">¿Por Qué Elegir Atención Especializada a Domicilio?</h2>
+            <div class="beneficios-grid">
+                <div class="beneficio">
+                    <div class="beneficio-icon">🏠</div>
+                    <div class="beneficio-text">
+                        <h4>Comodidad Total</h4>
+                        <p>Recibe atención médica especializada sin salir de casa, ideal para personas con movilidad reducida o adultos mayores</p>
+                    </div>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">⏰</div>
+                    <div class="beneficio-text">
+                        <h4>Ahorra Tiempo</h4>
+                        <p>Evita traslados, salas de espera y largas filas en hospitales o clínicas</p>
+                    </div>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">🛡️</div>
+                    <div class="beneficio-text">
+                        <h4>Atención Personalizada</h4>
+                        <p>Consulta privada y dedicada exclusivamente a ti, con tiempo suficiente para resolver todas tus dudas</p>
+                    </div>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">🦠</div>
+                    <div class="beneficio-text">
+                        <h4>Menor Exposición</h4>
+                        <p>Reduce el riesgo de contagio al evitar lugares concurridos como hospitales y clínicas</p>
+                    </div>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">👨‍⚕️</div>
+                    <div class="beneficio-text">
+                        <h4>Especialista Certificado</h4>
+                        <p>Atención por médico especialista en Medicina Interna con años de experiencia</p>
+                    </div>
+                </div>
+                <div class="beneficio">
+                    <div class="beneficio-icon">💚</div>
+                    <div class="beneficio-text">
+                        <h4>Atención Humanizada</h4>
+                        <p>Trato cálido y empático, especialmente importante para adultos mayores y pacientes crónicos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section class="ubicacion" id="ubicacion">
+        <div class="ubicacion-content">
+            <h2 class="section-title">Área de Cobertura</h2>
+            <div class="ubicacion-info">
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">📍</div>
+                    <h4>Atención a Domicilio</h4>
+                    <p>San Salvador y alrededores</p>
+                </div>
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">🏨</div>
+                    <h4>Consulta en Clínica</h4>
+                    <p>Disponible con cita previa</p>
+                </div>
+                <div class="ubicacion-item">
+                    <div class="ubicacion-item-icon">🕐</div>
+                    <h4>Horarios Flexibles</h4>
+                    <p>Adaptados a tu disponibilidad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contacto" id="contacto">
+        <div class="contacto-content">
+            <h2>¿Listo para Recibir Atención Médica Especializada?</h2>
+            <p>Agenda tu consulta ahora y recibe atención profesional de un especialista en Medicina Interna</p>
+
+            <div class="contacto-buttons">
+                <a href="https://wa.link/27apql" class="contacto-btn whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                </a>
+                <a href="tel:+50371170287" class="contacto-btn">
+                    <i class="fas fa-phone"></i> Llamar Ahora
+                </a>
+            </div>
+
+            <div class="redes-sociales">
+                <h3>Sígueme en Redes Sociales</h3>
+                <div class="redes-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100090722150996&mibextid=ZbWKwL" target="_blank" class="red-social-item">
+                        <div class="red-social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <span class="red-social-label">Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/tu_medico_especialista/" target="_blank" class="red-social-item">
+                        <div class="red-social-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <span class="red-social-label">Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@tu.mdico.especial8" target="_blank" class="red-social-item">
+                        <div class="red-social-icon tiktok">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <span class="red-social-label">TikTok</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Dr. Aldair Ramírez - Medicina Interna a Domicilio. Todos los derechos reservados.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Médico Especialista en Medicina Interna | San Salvador, El Salvador</p>
+    </footer>
+</body>
+</html>
